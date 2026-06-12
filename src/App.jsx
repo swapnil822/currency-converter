@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { InputBox } from "./Component";
+import { InputBox } from "./component";
 import useCurrencyInfo from "./hooks/useCurrency"
 // git remote set-url origin https://github.com/swapnil822/currency-converter.git
 function App() {

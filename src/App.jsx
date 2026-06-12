@@ -1,26 +1,25 @@
-
 import { useState } from "react";
-import { InputBox } from "./Component";
-import useCurrencyInfo from "./hooks/useCurrency"
-// git remote set-url origin https://github.com/swapnil822/currency-converter.git
+import { InputBox } from "./components";
+import useCurrencyInfo from "./hooks/useCurrencyInfo";
+
 function App() {
     const [amount, setAmount] = useState(0);
-    const [from, setFrom] = useState("USD");
-    const [to, setTo] = useState("INR");
+    const [from, setFrom] = useState("usd");
+    const [to, setTo] = useState("inr");
     const [convertedAmount, setConvertedAMount] = useState(0);
 
-    const currencyInfo = useCurrencyInfo(from);
+    const currencyInfo = useCurrencyInfo(from) || {};
     const options = Object.keys(currencyInfo);
 
     const convert = () => {
-        setConvertedAMount(amount * currencyInfo[to]);
+        setConvertedAMount(amount * (currencyInfo[to] || 0));
     }
 
     const swap = () => {
         setFrom(to);
         setTo(from);
         setAmount(convertedAmount);
-        setConvertedAMount(amount)
+        setConvertedAMount(amount);
     }
 
     return (
@@ -46,7 +45,6 @@ function App() {
                                 selectCurrency={from}
                                 onAmountChage={setAmount}
                                 onCurrencyChange={setFrom}
-                                
                             />
                         </div>
                         <div className="relative w-full h-0.5">
